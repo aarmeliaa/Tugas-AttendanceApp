@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">Tugas-AttendanceApp</string>
+    <array name="jenisPresensi">
+        <item>Hadir Tepat Waktu</item>
+        <item>Sakit</item>
+        <item>Terlambat</item>
+        <item>Izin</item>
+    </array>
 </resources>
