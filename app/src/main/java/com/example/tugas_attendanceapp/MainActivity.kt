@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
@@ -52,6 +53,40 @@ class MainActivity : AppCompatActivity() {
 
                 override fun onNothingSelected(parent: AdapterView<*>?) {
                 }
+            }
+
+            btnSubmit.setOnClickListener {
+                val day = datePicker.dayOfMonth
+                val month = datePicker.month + 1
+                val year = datePicker.year
+                val tanggal = "$day/$month/$year"
+
+                val hour = timePicker.hour
+                val minute = timePicker.minute
+                val waktu = String.format("%02d:%02d", hour, minute)
+
+                val pilihanPresensi = spinnerPresensi.selectedItem.toString()
+
+                var keterangan = ""
+                if (edittextKet.visibility == View.VISIBLE) {
+                    keterangan = edittextKet.text.toString()
+                }
+
+                val message = "Presensi: $pilihanPresensi\nTanggal: $tanggal\nWaktu: $waktu\nKeterangan: $keterangan"
+
+                val toastView = layoutInflater.inflate(R.layout.custom_toast, null)
+                val toastText: TextView = toastView.findViewById(R.id.toast_text)
+                toastText.text = message
+
+                val customToast = Toast(applicationContext)
+                customToast.duration = Toast.LENGTH_LONG
+                customToast.view = toastView
+                customToast.show()
+            }
+
+            btnKeluar.setOnClickListener {
+                val dialog = DialogExit()
+                dialog.show(supportFragmentManager, "dialogExit")
             }
         }
     }
